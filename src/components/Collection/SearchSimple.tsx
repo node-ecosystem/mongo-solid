@@ -3,7 +3,7 @@ import { navigate } from 'vike-lite/client/router'
 
 import IconSearch from '@/components/Icons/IconSearch'
 
-const VALUES_TO_DISPLAY = {
+const TYPE_MAP = {
   'O': 'ObjectId',
   'U': 'UUID',
   'N': 'Number',
@@ -13,7 +13,7 @@ const VALUES_TO_DISPLAY = {
   'J': 'JSON'
 }
 
-type SelectValue = typeof VALUES_TO_DISPLAY[keyof typeof VALUES_TO_DISPLAY]
+export type TypeMap = typeof TYPE_MAP
 
 const SearchSimple: Component<{
   data: DataCollection
@@ -21,7 +21,7 @@ const SearchSimple: Component<{
   let buttonRef: HTMLButtonElement | undefined
   const [inputKey, setInputKey] = createSignal(props.data.queryParameters.key || '')
   const [inputValue, setInputValue] = createSignal(props.data.queryParameters.value || '')
-  const [selectValue, setSelectValue] = createSignal<SelectValue>(props.data.queryParameters.type ? VALUES_TO_DISPLAY[props.data.queryParameters.type as keyof typeof VALUES_TO_DISPLAY] : 'ObjectId')
+  const [selectedType, setSelectedType] = createSignal<TypeMapKeys>(props.data.queryParameters.type ?? 'O')
 
   return (
     <div class="flex flex-row gap-2">
@@ -58,17 +58,17 @@ const SearchSimple: Component<{
 
       <select
         class="list select"
-        value={selectValue()}
+        value={selectedType()}
         onKeyUp={(event) => {
           if (event.key === 'Enter') {
             event.preventDefault()
             buttonRef!.click()
           }
         }}
-        onChange={(event) => setSelectValue(event.currentTarget.value as SelectValue)}
+        onChange={(event) => setSelectedType(event.currentTarget.value as TypeMapKeys)}
       >
-        <For each={Object.values(VALUES_TO_DISPLAY)}>
-          {(value) => <option value={value} selected={value === selectValue()}>{value}</option>}
+        <For each={Object.keys(TYPE_MAP) as TypeMapKeys[]}>
+          {(value) => <option value={value} selected={value === selectedType()}>{TYPE_MAP[value]}</option>}
         </For>
       </select>
 
@@ -77,7 +77,7 @@ const SearchSimple: Component<{
         disabled={!inputKey() || !inputValue()}
         ref={buttonRef}
         onClick={async () => {
-          await navigate(`/db/${props.data.selectedDatabase}/${props.data.selectedCollection}?key=${encodeURIComponent(inputKey())}&value=${encodeURIComponent(inputValue())}&type=${Object.keys(VALUES_TO_DISPLAY).find(key => VALUES_TO_DISPLAY[key as keyof typeof VALUES_TO_DISPLAY] === selectValue())}`)
+          await navigate(`/db/${props.data.selectedDatabase}/${props.data.selectedCollection}?key=${encodeURIComponent(inputKey())}&value=${encodeURIComponent(inputValue())}&type=${selectedType()}`)
         }}
       >
         <IconSearch />

@@ -177,6 +177,8 @@ interface Params extends ParsedUrlQuery {
   documentId: string
 }
 
+type TypeMapKeys = keyof import('@/components/Collection/SearchSimple').TypeMap
+
 interface QueryParameter extends ParsedUrlQuery {
   // mongodb
   sort?: string  // sort by fields, e.g. name,-age
@@ -185,7 +187,7 @@ interface QueryParameter extends ParsedUrlQuery {
   page?: string
   key?: string
   value?: string
-  type?: string
+  type?: TypeMapKeys
   query?: string
   subtype?: string
   aggregate?: 'true' | 'false'
