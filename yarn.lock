@@ -2192,12 +2192,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^26.6.2":
-  version: 26.6.2
-  resolution: "@types/node@npm:26.6.2"
+"@types/node@npm:*, @types/node@npm:^26.6.3":
+  version: 26.6.3
+  resolution: "@types/node@npm:26.6.3"
   dependencies:
     undici-types: "npm:~8.9.0"
-  checksum: 10c0/bb411ff5863a79a28ffa4ebadf2499d44046aa114d25a7a6c78f57def118123a0a7dea99e8fe38849099e9dba2b41b8853a7a282037618559f58653c35e7c5c5
+  checksum: 10c0/51070287167d157d246a5ad83e6ead93aa310bbd9cc880ecd1f244a00c2a31491620f997fbbb6ba4ce164388694827999ec68c1d16c3fb64c1037056e64613c7
   languageName: node
   linkType: hard
 
@@ -3022,10 +3022,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"daisyui@npm:^5.7.44":
-  version: 5.7.44
-  resolution: "daisyui@npm:5.7.44"
-  checksum: 10c0/8c286b36ce1eec581514d378bac7762287a6c652ca034fcf0d0ed29ad7acf5924e79bdce9b1398e407097b29000ddb6a1d78c25c7cd10fa183284757ac21a4ca
+"daisyui@npm:^5.7.46":
+  version: 5.7.46
+  resolution: "daisyui@npm:5.7.46"
+  checksum: 10c0/26db9625961b3bc30e63e6166c8347065d6c6eb48b8b6e4d94d4d6ad4aa1400a66573349cae8a72e9306846b0285ceada83341383c5ba9cb3bd25a8592d496e3
   languageName: node
   linkType: hard
 
@@ -5055,10 +5055,10 @@ __metadata:
     "@solid-primitives/pagination": "npm:^0.5.2"
     "@speed-highlight/core": "npm:^2.1.0"
     "@tailwindcss/vite": "npm:^4.3.3"
-    "@types/node": "npm:^26.6.2"
+    "@types/node": "npm:^26.6.3"
     "@yarnpkg/sdks": "npm:^3.3.1"
     bson: "npm:^7.3.3"
-    daisyui: "npm:^5.7.44"
+    daisyui: "npm:^5.7.46"
     eslint: "npm:^10.11.0"
     eslint-plugin-solid: "npm:^0.18.0"
     eslint-plugin-tailwindcss: "npm:4.3.0"
