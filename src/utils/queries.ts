@@ -197,15 +197,15 @@ export const getAggregatePipeline = (pipeline: Pipeline, queryOptions: QueryOpti
 }
 
 export const getItemsAndCount = async (
-  query: QueryParameter,
+  queryParameters: QueryParameter,
   queryOptions: QueryOptions,
   collection: import('mongodb').Collection<MongoDocument>,
   config: Config
 ) => {
-  let _query = getQuery(query)
-  if (query.aggregate === 'true' && _query.constructor.name === 'Array') {
-    if (_query.length > 0) {
-      const queryAggregate = getAggregatePipeline(_query as Pipeline, queryOptions)
+  let query = getQuery(queryParameters)
+  if (queryParameters.aggregate === 'true' && query.constructor.name === 'Array') {
+    if (query.length > 0) {
+      const queryAggregate = getAggregatePipeline(query as Pipeline, queryOptions)
       const [{ items, count }] = await collection.aggregate<{
         items: MongoDocument[]
         count: { count: number }[]
@@ -215,7 +215,7 @@ export const getItemsAndCount = async (
         count: count[0].count
       }
     }
-    _query = {}
+    query = {}
   }
 
   if (config.mongodb.allowDiskUse && !config.mongodb.awsDocumentDb) {
@@ -224,10 +224,10 @@ export const getItemsAndCount = async (
 
   const [items, count] = await Promise.all([
     // eslint-disable-next-line unicorn/no-array-callback-reference, unicorn/no-array-method-this-argument
-    collection.find<MongoDocument>(_query as MongoDocument, queryOptions).toArray(),
+    collection.find<MongoDocument>(query as MongoDocument, queryOptions).toArray(),
     // TODO maybe replace count with countDocuments
     // Read related discussion on https://github.com/mongo-express/mongo-express/issues/1518
-    collection.count(_query as MongoDocument)
+    collection.count(query as MongoDocument)
   ])
   return {
     items,
