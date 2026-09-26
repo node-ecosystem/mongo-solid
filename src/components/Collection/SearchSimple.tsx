@@ -3,23 +3,25 @@ import { navigate } from 'vike-lite/client/router'
 
 import IconSearch from '@/components/Icons/IconSearch'
 
-const SELECT_VALUES = {
-  'ObjectId': 'O',
-  'UUID': 'U',
-  'Number': 'N',
-  'String': 'S',
-  'Boolean': 'B',
-  'Regex': 'R',
-  'JSON': 'J'
+const VALUES_TO_DISPLAY = {
+  'O': 'ObjectId',
+  'U': 'UUID',
+  'N': 'Number',
+  'S': 'String',
+  'B': 'Boolean',
+  'R': 'Regex',
+  'J': 'JSON'
 }
+
+type SelectValue = typeof VALUES_TO_DISPLAY[keyof typeof VALUES_TO_DISPLAY]
 
 const SearchSimple: Component<{
   data: DataCollection
 }> = (props) => {
   let buttonRef: HTMLButtonElement | undefined
-  const [inputKey, setInputKey] = createSignal('')
-  const [inputValue, setInputValue] = createSignal('')
-  const [selectValue, setSelectValue] = createSignal<keyof typeof SELECT_VALUES>('ObjectId')
+  const [inputKey, setInputKey] = createSignal(props.data.queryParameters.key || '')
+  const [inputValue, setInputValue] = createSignal(props.data.queryParameters.value || '')
+  const [selectValue, setSelectValue] = createSignal<SelectValue>(props.data.queryParameters.type ? VALUES_TO_DISPLAY[props.data.queryParameters.type as keyof typeof VALUES_TO_DISPLAY] : 'ObjectId')
 
   return (
     <div class="flex flex-row gap-2">
@@ -63,10 +65,10 @@ const SearchSimple: Component<{
             buttonRef!.click()
           }
         }}
-        onChange={(event) => setSelectValue(event.currentTarget.value as keyof typeof SELECT_VALUES)}
+        onChange={(event) => setSelectValue(event.currentTarget.value as SelectValue)}
       >
-        <For each={Object.keys(SELECT_VALUES)}>
-          {(value) => <option value={value}>{value}</option>}
+        <For each={Object.values(VALUES_TO_DISPLAY)}>
+          {(value) => <option value={value} selected={value === selectValue()}>{value}</option>}
         </For>
       </select>
 
@@ -75,7 +77,7 @@ const SearchSimple: Component<{
         disabled={!inputKey() || !inputValue()}
         ref={buttonRef}
         onClick={async () => {
-          await navigate(`/db/${props.data.selectedDatabase}/${props.data.selectedCollection}?key=${encodeURIComponent(inputKey())}&value=${encodeURIComponent(inputValue())}&type=${SELECT_VALUES[selectValue()]}`)
+          await navigate(`/db/${props.data.selectedDatabase}/${props.data.selectedCollection}?key=${encodeURIComponent(inputKey())}&value=${encodeURIComponent(inputValue())}&type=${Object.keys(VALUES_TO_DISPLAY).find(key => VALUES_TO_DISPLAY[key as keyof typeof VALUES_TO_DISPLAY] === selectValue())}`)
         }}
       >
         <IconSearch />

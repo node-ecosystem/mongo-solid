@@ -41,9 +41,7 @@ export const data = async (pageContext: PageContextServer<DataCollection>) => {
     // Pagination
     _data.count = count
     _data.documentsPerPage = config.options.documentsPerPage
-    _data.aggregate = search.aggregate === 'true'
-    _data.query = search.query
-    _data.projection = search.projection
+    _data.queryParameters = search
   }
   return _data
 }

@@ -13,18 +13,18 @@ const EMPTY_OBJECT_TEMPLATE = `{
 
 const SearchAdvanced: Component<{ data: DataCollection }> = (props) => {
   // eslint-disable-next-line solid/reactivity
-  const [codeQuery, setCodeQuery] = createSignal(props.data.query || EMPTY_OBJECT_TEMPLATE)
+  const [codeQuery, setCodeQuery] = createSignal(props.data.queryParameters.query || EMPTY_OBJECT_TEMPLATE)
   // eslint-disable-next-line solid/reactivity
-  const [codeProjection, setCodeProjection] = createSignal(props.data.projection || EMPTY_OBJECT_TEMPLATE)
+  const [codeProjection, setCodeProjection] = createSignal(props.data.queryParameters.projection || EMPTY_OBJECT_TEMPLATE)
   // eslint-disable-next-line solid/reactivity
-  const [checkboxAggregate, setCheckboxAggregate] = createSignal(props.data.aggregate)
+  const [checkboxAggregate, setCheckboxAggregate] = createSignal(props.data.queryParameters.aggregate === 'true')
   const [isCodeQueryValid, setIsCodeQueryValid] = createSignal(true)
   const [isCodeProjectionValid, setIsCodeProjectionValid] = createSignal(true)
 
   createEffect(() => {
-    setCodeQuery(props.data.query || EMPTY_OBJECT_TEMPLATE)
-    setCodeProjection(props.data.projection || EMPTY_OBJECT_TEMPLATE)
-    setCheckboxAggregate(props.data.aggregate)
+    setCodeQuery(props.data.queryParameters.query || EMPTY_OBJECT_TEMPLATE)
+    setCodeProjection(props.data.queryParameters.projection || EMPTY_OBJECT_TEMPLATE)
+    setCheckboxAggregate(props.data.queryParameters.aggregate === 'true')
   })
 
   const handleSave = async () => {
