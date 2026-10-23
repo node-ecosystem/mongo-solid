@@ -44,7 +44,7 @@
     "eslint": "^10.13.0",
     "eslint-plugin-solid": "^0.18.1",
     "eslint-plugin-tailwindcss": "4.3.0",
-    "eslint-plugin-unicorn": "^76.0.0",
+    "eslint-plugin-unicorn": "^78.0.0",
     "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.72.0",

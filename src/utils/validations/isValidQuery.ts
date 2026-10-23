@@ -29,19 +29,19 @@ const VALID_OPERATORS: ReadonlySet<string> = new Set([
 // Type validators
 const TYPE_VALIDATORS = new Map<string, (value: string) => void>([
   ['ISODate', (v) => {
-    if (Number.isNaN(Date.parse(v))) throw new Error(`Invalid ISODate: "${v}"`)
+    if (Number.isNaN(Date.parse(v))) throw new TypeError(`Invalid ISODate: "${v}"`)
   }],
   ['ObjectId', (v) => {
-    if (!/^[a-fA-F0-9]{24}$/.test(v)) throw new Error(`Invalid ObjectId: "${v}"`)
+    if (!/^[a-fA-F0-9]{24}$/.test(v)) throw new TypeError(`Invalid ObjectId: "${v}"`)
   }],
   ['NumberLong', (v) => {
-    if (!/^-?\d+$/.test(v)) throw new Error(`Invalid NumberLong: "${v}"`)
+    if (!/^-?\d+$/.test(v)) throw new TypeError(`Invalid NumberLong: "${v}"`)
   }],
   ['NumberInt', (v) => {
-    if (!/^-?\d+$/.test(v)) throw new Error(`Invalid NumberInt: "${v}"`)
+    if (!/^-?\d+$/.test(v)) throw new TypeError(`Invalid NumberInt: "${v}"`)
   }],
   ['NumberDecimal', (v) => {
-    if (Number.isNaN(Number(v))) throw new Error(`Invalid NumberDecimal: "${v}"`)
+    if (Number.isNaN(Number(v))) throw new TypeError(`Invalid NumberDecimal: "${v}"`)
   }]
 ])
 

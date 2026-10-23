@@ -1,8 +1,8 @@
 import fs from 'node:fs'
 
 /**
- * Accessing Bluemix variable to get MongoDB info
- */
+Accessing Bluemix variable to get MongoDB info
+*/
 function getBlueMixConfig() {
   const dbLabel = 'mongodb-2.4'
   const env = JSON.parse(process.env.VCAP_SERVICES!)
@@ -51,8 +51,8 @@ export const ConfigDefault = {
     connectionString: process.env.VCAP_SERVICES ? getBlueMixConfig()! : process.env.ME_CONFIG_MONGODB_URL!,
 
     /**
-     * @type {import('mongodb').MongoClientOptions}
-     */
+    @type {import('mongodb').MongoClientOptions}
+    */
     connectionOptions: {
       // tls: connect to the server using secure SSL
       tls: getBoolean(process.env.ME_CONFIG_MONGODB_SSL),

@@ -6,9 +6,9 @@ const SIZE_UNITS = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'] as 
 const BASE = 1024
 
 /**
- * Converts a byte count into a human-readable size string.
- * e.g. 1536 → "1.50 KB"
- */
+Converts a byte count into a human-readable size string.
+e.g. 1536 → "1.50 KB"
+*/
 export const bytesToSize = (bytes?: number): string => {
   if (!bytes || bytes < 0) return '0 Bytes'
   const i = Math.floor(Math.log(bytes) / Math.log(BASE))
@@ -59,11 +59,11 @@ export const deepmerge = (target: object[] | object, src: object[] | object) => 
 }
 
 /**
- * Convert BSON into a plain string:
- * - { _bsontype: 'ObjectId', id: <Buffer> } => <ObjectId>
- * - { _bsontype: 'Binary', __id: undefined, sub_type: 4, position: 16, buffer: <Buffer> } => <UUID>
- * - { _bsontype: 'Binary', __id: undefined, sub_type: <number_not_4>, position: 16, buffer: <Buffer> } => <Binary>
- */
+Convert BSON into a plain string:
+- { _bsontype: 'ObjectId', id: <Buffer> } => <ObjectId>
+- { _bsontype: 'Binary', __id: undefined, sub_type: 4, position: 16, buffer: <Buffer> } => <UUID>
+- { _bsontype: 'Binary', __id: undefined, sub_type: <number_not_4>, position: 16, buffer: <Buffer> } => <Binary>
+*/
 export const docToString = function (input: BSONValues): string | number | boolean | null | undefined | object {
   if (input == null) return input
 
@@ -73,9 +73,9 @@ export const docToString = function (input: BSONValues): string | number | boole
   }
 
   /**
-   * See similar toString in BSON_TO_JS_STRING in src/utils/mongodb-query-parser/stringify.ts for the reverse operation (string to BSON)
-   * @link https://github.com/mongodb-js/devtools-shared/blob/main/packages/query-parser/src/stringify.ts
-   */
+  See similar toString in BSON_TO_JS_STRING in src/utils/mongodb-query-parser/stringify.ts for the reverse operation (string to BSON)
+  @link https://github.com/mongodb-js/devtools-shared/blob/main/packages/query-parser/src/stringify.ts
+  */
   // Object with specific constructor (BSON types, Date, etc.)
   if (typeof input === 'object') {
     switch (input.constructor.name) {

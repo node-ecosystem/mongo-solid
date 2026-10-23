@@ -11,8 +11,8 @@ const UPDATE_OPERATORS: ReadonlySet<string> = new Set([
 export type ReturnValidation = { error?: string }
 
 /**
- * Validates document fields iteratively (Stack-based).
- */
+Validates document fields iteratively (Stack-based).
+*/
 function validateFields(root: Record<string, unknown>): ReturnValidation | undefined {
   const stack: { obj: Record<string, unknown>; isRoot: boolean; path: string }[] = [
     { obj: root, isRoot: true, path: '' }
@@ -67,21 +67,21 @@ function validateFields(root: Record<string, unknown>): ReturnValidation | undef
 }
 
 /**
- * Validates a string as a MongoDB insert document.
- *
- * Examples:
- * ✅ Valid
- * {}
- * { "name": "Alice", "age": 30 }
- * { "_id": "custom-id", "status": "active" }
- * { "tags": ["a", "b"], "meta": { "views": 0 } }
- *
- * ❌ Invalid
- * []                          — array (use insertMany)
- * { "$set": { "name": "X" } } — update operator, not a document
- * { "   ": "value" }          — whitespace field
- * "just a string"             — not an object
- */
+Validates a string as a MongoDB insert document.
+
+Examples:
+✅ Valid
+{}
+{ "name": "Alice", "age": 30 }
+{ "_id": "custom-id", "status": "active" }
+{ "tags": ["a", "b"], "meta": { "views": 0 } }
+
+❌ Invalid
+[]                          — array (use insertMany)
+{ "$set": { "name": "X" } } — update operator, not a document
+{ "   ": "value" }          — whitespace field
+"just a string"             — not an object
+*/
 function parseAndValidate(str: string): ReturnValidation {
   if (!str?.trim()) return { error: 'Insert document cannot be empty' }
   let obj: unknown
@@ -94,10 +94,10 @@ function parseAndValidate(str: string): ReturnValidation {
 }
 
 /**
- * Validates a single top-level `key: value` fragment (as produced by
- * `getTopLevelEntries`) using the same rules as a full document, since a
- * fragment always represents exactly one top-level property of the real doc.
- */
+Validates a single top-level `key: value` fragment (as produced by
+`getTopLevelEntries`) using the same rules as a full document, since a
+fragment always represents exactly one top-level property of the real doc.
+*/
 export function isValidInsertDocumentEntry(entryText: string): ReturnValidation {
   const trimmed = entryText.trim().replace(/,$/, '')
   return parseAndValidate(`{ ${trimmed} }`)

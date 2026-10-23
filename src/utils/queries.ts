@@ -47,8 +47,8 @@ const parseObjectId = (string: string) => {
 }
 
 /**
- * @param sort example: sort=field1,-field2
- */
+@param sort example: sort=field1,-field2
+*/
 const getSort = (sort: string): Sort => {
   if (sort) {
     const outSort: Writeable<Sort> = {}

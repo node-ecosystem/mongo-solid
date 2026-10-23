@@ -24,14 +24,14 @@ const getEntryKeyName = (entryText: string, fallbackIndex: number): string => {
 }
 
 /**
- * Splits a pretty-printed document body into its top-level ("depth === 1")
- * property blocks, so callers can re-validate a single edited property
- * instead of the whole document.
- *
- * Returns `null` when the document isn't a single balanced root object/array
- * (e.g. mid-edit with a missing brace, or unusual formatting) — callers
- * should fall back to validating the whole text in that case.
- */
+Splits a pretty-printed document body into its top-level ("depth === 1")
+property blocks, so callers can re-validate a single edited property
+instead of the whole document.
+
+Returns `null` when the document isn't a single balanced root object/array
+(e.g. mid-edit with a missing brace, or unusual formatting) — callers
+should fall back to validating the whole text in that case.
+*/
 export default function getTopLevelEntries(text: string): TopLevelEntry[] | null {
   const lines = text.split('\n')
   let depth = 0

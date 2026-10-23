@@ -14,11 +14,7 @@ const ImportCollectionButton: Component<{
 
     const { files } = event.target
 
-    if (!files || files.length === 0) {
-      return
-    }
-    if (files.length > 1) {
-      // console.info('Multiple files selected')
+    if (!files || files.length !== 1) {
       return
     }
 

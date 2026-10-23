@@ -40,6 +40,7 @@ export default defineConfig({
     'unicorn/numeric-separators-style': 0,
     'unicorn/prefer-continue': 0,
     'unicorn/prefer-early-return': 0,
+    'unicorn/prefer-logical-operator-over-ternary': 0,
     'unicorn/prefer-node-protocol': 0,
 
     'solid/no-innerhtml': 0,

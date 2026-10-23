@@ -39,8 +39,8 @@ const AGGREGATION_STAGES: ReadonlySet<string> = new Set([
 export type ReturnValidation = { error?: string }
 
 /**
- * Validates a string as a MongoDB aggregation pipeline.
- */
+Validates a string as a MongoDB aggregation pipeline.
+*/
 export function isValidAggregation(str: string): ReturnValidation {
   if (!str?.trim()) {
     return { error: 'Empty' }

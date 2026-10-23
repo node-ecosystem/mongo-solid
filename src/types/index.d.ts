@@ -2,12 +2,12 @@ type ParsedUrlQuery = import('querystring').ParsedUrlQuery
 
 type Admin = import('mongodb').Admin
 /**
- * import('mongodb').CollStats type is missing from deprecation
- * @see https://docs.mongodb.org/manual/reference/command/collStats
- * Now CollStats is the result of the aggregation pipeline with $collStats stage,
- * which is the recommended way to get collection stats
- * @see https://www.mongodb.com/docs/manual/reference/operator/aggregation/collStats
- */
+import('mongodb').CollStats type is missing from deprecation
+@see https://docs.mongodb.org/manual/reference/command/collStats
+Now CollStats is the result of the aggregation pipeline with $collStats stage,
+which is the recommended way to get collection stats
+@see https://www.mongodb.com/docs/manual/reference/operator/aggregation/collStats
+*/
 type CollStats = {
   storageStats: {
     size: number
@@ -48,9 +48,9 @@ type CustomApiError = (unknown | Error) & {
 }
 
 /**
- * Type definition is missing in mongodb
- * @see https://www.mongodb.com/docs/manual/reference/command/serverStatus
- */
+Type definition is missing in mongodb
+@see https://www.mongodb.com/docs/manual/reference/command/serverStatus
+*/
 interface ServerStatus extends MongoDocument {
   host: string
   version: string
@@ -88,9 +88,9 @@ interface ServerStatus extends MongoDocument {
 }
 
 /**
- * Type definition is missing in mongodb
- * @see https://www.mongodb.com/docs/manual/reference/command/dbStats
- */
+Type definition is missing in mongodb
+@see https://www.mongodb.com/docs/manual/reference/command/dbStats
+*/
 interface DbStats extends MongoDocument {
   db: string
   collections: number

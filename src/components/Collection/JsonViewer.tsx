@@ -6,8 +6,8 @@ const MAX_LEN = 36
 const MAX_ARRAY_ELEMENTS = 5
 
 /**
- * Inspired by https://anyroad.github.io/react-json-view-lite/?path=/docs/json-view--docs
- */
+Inspired by https://anyroad.github.io/react-json-view-lite/?path=/docs/json-view--docs
+*/
 const RenderLongText: Component<{ text: string }> = (props) => {
   // On click expand/collapse long text
   const [expanded, setExpanded] = createSignal(false)
@@ -90,9 +90,9 @@ const JsonNode: Component<{
   // (?) TODO remove " "
   const collapsedDisplay = () => {
     if (isArray) {
-      return open() ? '[' : `[ ${props.value.length} ]${props.isLast ? '' : ','}`
+      return open() ? '[' : `[\u{A0}${props.value.length}\u{A0}]${props.isLast ? '' : ','}`
     }
-    return open() ? '{' : `{ … }${props.isLast ? '' : ','}`
+    return open() ? '{' : `{\u{A0}…\u{A0}}${props.isLast ? '' : ','}`
   }
 
   return (
@@ -104,7 +104,7 @@ const JsonNode: Component<{
             <Show when={props.isObjectItem}>
               <span class="text-blue-300">{props.keyName}</span>
 
-              <span class="text-gray-400">{': '}</span>
+              <span class="text-gray-400">{':\u{A0}'}</span>
             </Show>
 
             {displayValue()}
@@ -117,12 +117,12 @@ const JsonNode: Component<{
       >
         {/* (?) TODO remove " " */}
         <span class="cursor-pointer" onClick={() => setOpen(!open())}>
-          <span class="text-purple-300 select-none">{open() ? '▼ ' : '▶ '}</span>
+          <span class="text-purple-300 select-none">{open() ? '▼\u{A0}' : '▶\u{A0}'}</span>
 
           <Show when={props.isObjectItem}>
             <span class="text-blue-300">{props.keyName}</span>
 
-            <span class="text-gray-400">{': '}</span>
+            <span class="text-gray-400">{':\u{A0}'}</span>
           </Show>
 
           <span class="text-gray-500 hover:text-gray-400">

@@ -16,15 +16,15 @@ function isPlainObject(value: unknown): value is Record<string, unknown> {
 interface CsvCell {
   value: string
   /** Whether the field was wrapped in quotes in the source CSV — used to tell
-   *  an explicit empty string ("") apart from a genuinely absent field. */
+  an explicit empty string ("") apart from a genuinely absent field. */
   quoted: boolean
 }
 
 /**
- * RFC4180-ish CSV parser: handles quoted fields containing commas, embedded
- * newlines and escaped ("") quotes, and tracks per-field quoting so callers
- * can distinguish an explicit empty string from an absent value.
- */
+RFC4180-ish CSV parser: handles quoted fields containing commas, embedded
+newlines and escaped ("") quotes, and tracks per-field quoting so callers
+can distinguish an explicit empty string from an absent value.
+*/
 function parseCsv(text: string): CsvCell[][] {
   const rows: CsvCell[][] = []
   let row: CsvCell[] = []
@@ -93,13 +93,13 @@ function parseCsv(text: string): CsvCell[][] {
 }
 
 /**
- * Recovers a scalar/structural value from a CSV cell. Values exported by
- * `generateCollectionCsv` always carry their BSON type as an EJSON tag
- * (e.g. {"$oid":"..."}), so `EJSON.parse` alone is enough to reconstruct the
- * correct BSON type — no fragile heuristics (looks-like-an-ObjectId,
- * looks-like-a-date) are needed, and none are used, since those would wrongly
- * promote genuine string fields that merely resemble a hex id or a date.
- */
+Recovers a scalar/structural value from a CSV cell. Values exported by
+`generateCollectionCsv` always carry their BSON type as an EJSON tag
+(e.g. {"$oid":"..."}), so `EJSON.parse` alone is enough to reconstruct the
+correct BSON type — no fragile heuristics (looks-like-an-ObjectId,
+looks-like-a-date) are needed, and none are used, since those would wrongly
+promote genuine string fields that merely resemble a hex id or a date.
+*/
 function castCsvValue(cell: CsvCell): unknown {
   const { value: raw, quoted } = cell
   if (raw === '') return quoted ? '' : undefined
